@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ArtStore.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace ArtStore.Controllers
@@ -17,7 +18,7 @@ namespace ArtStore.Controllers
         }
 
         [HttpPost("contact")]
-        public IActionResult Contact(object model)
+        public IActionResult Contact(ContactViewModel model)
         {
             return View();
         }
