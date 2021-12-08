@@ -9,5 +9,17 @@ namespace ArtStore.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            ViewBag.Title = "Contact Us";
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewBag.Title = "About Us";
+            return View();
+        }
     }
 }
