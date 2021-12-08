@@ -12,9 +12,13 @@ namespace ArtStore.Controllers
 
         [HttpGet("contact")]
         public IActionResult Contact()
+        {           
+            return View();
+        }
+
+        [HttpPost("contact")]
+        public IActionResult Contact(object model)
         {
-            throw new InvalidOperationException("Bad things happen to good developers");
-            ViewBag.Title = "Contact Us";
             return View();
         }
 
