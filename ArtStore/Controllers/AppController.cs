@@ -20,6 +20,14 @@ namespace ArtStore.Controllers
         [HttpPost("contact")]
         public IActionResult Contact(ContactViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                // Send email                
+            }
+            else
+            {
+                // Show the errors
+            }
             return View();
         }
 
