@@ -60,10 +60,6 @@ namespace ArtStore.Controllers
 
         public IActionResult Shop()
         {
-            //var results = _context.Products
-            //    .OrderBy(p => p.Category)
-            //    .ToList();
-
             // or by linq query
             var result = from p in _context.Products
                           orderby p.Category
