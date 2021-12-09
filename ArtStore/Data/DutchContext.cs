@@ -27,6 +27,7 @@ namespace ArtStore.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Seeding data - HasData allow to add/ seed data to Db by embeding it into migration
             modelBuilder.Entity<Order>()
                 .HasData(new Order()
                 {

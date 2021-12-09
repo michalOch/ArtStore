@@ -25,8 +25,9 @@ namespace ArtStore
 
             services.AddTransient<IMailService, NullMailService>();
 
-            services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+            services.AddScoped<IDutchRepository, DutchRepository>();
+
+            services.AddMvc();
 
             services.AddRazorPages();
         }
