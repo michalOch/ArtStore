@@ -1,0 +1,9 @@
+{
+  "Colors": {
+    "Favourite": "Blue"
+  },
+
+  "ConnectionStrings": {
+    "DutchContextDb": "Server=(localdb)\\MSSQLLocalDB;Database=DutchTreatDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
