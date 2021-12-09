@@ -10,12 +10,12 @@ namespace ArtStore.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly DutchContext _context;
+        private readonly IDutchRepository _repository;
 
-        public AppController(IMailService mailService, DutchContext context)
+        public AppController(IMailService mailService, IDutchRepository repository)
         {
             _mailService = mailService;
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -60,10 +60,7 @@ namespace ArtStore.Controllers
 
         public IActionResult Shop()
         {
-            // or by linq query
-            var result = from p in _context.Products
-                          orderby p.Category
-                          select p;
+            var result = _repository.GetAllProducts();
 
             return View(result.ToList());
         }

@@ -45,7 +45,6 @@ namespace ArtStore
             .UseStartup<Startup>()
             .Build();
 
-
         private static void SetupConfiguration(WebHostBuilderContext ctx,
             IConfigurationBuilder builder)
         {
