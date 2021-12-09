@@ -1,17 +1,21 @@
-﻿using ArtStore.Services;
+﻿using ArtStore.Data;
+using ArtStore.Services;
 using ArtStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace ArtStore.Controllers
 {
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly DutchContext _context;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, DutchContext context)
         {
             _mailService = mailService;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -51,6 +55,21 @@ namespace ArtStore.Controllers
         {
             ViewBag.Title = "About Us";
             return View();
+        }
+
+
+        public IActionResult Shop()
+        {
+            //var results = _context.Products
+            //    .OrderBy(p => p.Category)
+            //    .ToList();
+
+            // or by linq query
+            var result = from p in _context.Products
+                          orderby p.Category
+                          select p;
+
+            return View(result.ToList());
         }
     }
 }
