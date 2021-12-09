@@ -1,4 +1,4 @@
-﻿using DutchTreat.Data.Entities;
+﻿using ArtStore.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

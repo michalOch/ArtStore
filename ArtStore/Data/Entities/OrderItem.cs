@@ -1,4 +1,4 @@
-﻿namespace DutchTreat.Data.Entities
+﻿namespace ArtStore.Data.Entities
 {
   public class OrderItem
   {
