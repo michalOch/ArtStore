@@ -1,5 +1,6 @@
 using ArtStore.Data;
 using ArtStore.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ArtStore
@@ -22,6 +24,8 @@ namespace ArtStore
             services.AddDbContext<DutchContext>();
 
             services.AddTransient<DutchSeeder>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<IMailService, NullMailService>();
 
