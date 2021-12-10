@@ -9,7 +9,9 @@ namespace ArtStore.Data
         public DutchMappingsProfile()
         {
             CreateMap<Order, OrderViewModel>()
-                .ForMember( o => o.OrderId, ex => ex.MapFrom(o => o.Id));
+                .ForMember( o => o.OrderId, ex => ex.MapFrom(o => o.Id))
+                .ReverseMap();
+
         }
     }
 }
