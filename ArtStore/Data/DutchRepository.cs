@@ -33,8 +33,6 @@ namespace ArtStore.Data
                 _logger.LogError($"Failed to get all products: {ex}");
                 return null;
             }
-
-
         }
 
         public IEnumerable<Product> GetProductsByCategory(string category)
@@ -64,6 +62,11 @@ namespace ArtStore.Data
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public void AddEntity(object model)
+        {
+            _context.Add(model);
         }
     }
 }
