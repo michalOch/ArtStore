@@ -27,7 +27,10 @@ namespace ArtStore
 
             services.AddScoped<IDutchRepository, DutchRepository>();
 
-            services.AddMvc();
+            //services.AddMvc();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddRazorPages();
         }

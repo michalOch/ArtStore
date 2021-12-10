@@ -1,4 +1,5 @@
 ﻿using ArtStore.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,23 @@ namespace ArtStore.Data
             return _context.Products
                 .Where(p => p.Category == category)
                 .ToList();
+        }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+            return _context.Orders
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .ToList();
+        }
+
+        public Order GetOrderById(int id)
+        {
+            return _context.Orders
+                    .Include(o => o.Items)
+                    .ThenInclude(i => i.Product)
+                    .Where(o => o.Id == id)
+                    .FirstOrDefault();
         }
 
         public bool SaveAll()

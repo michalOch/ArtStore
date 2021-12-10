@@ -32,7 +32,8 @@ namespace ArtStore.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Failed to get products: {ex.Message}");  
+                _logger.LogError($"Failed to get orders: {ex}");
+                return BadRequest($"Failed to get products");  
             }        
         }
     }
