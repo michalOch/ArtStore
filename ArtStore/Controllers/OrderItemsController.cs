@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ArtStore.Controllers
 {
@@ -33,6 +34,37 @@ namespace ArtStore.Controllers
                 if (order != null)
                 {
                     return Ok(_mapper.Map<IEnumerable<OrderItem>, IEnumerable<OrderItemViewModel>>(order.Items));
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get order items: {ex}");
+                return BadRequest($"Failed to get order items");
+            }
+        }
+
+        // "/api/orders/{orderid}/items/{id}"
+        [HttpGet("{id}")]
+        public IActionResult Get(int orderId, int id)
+        {
+            try
+            {
+                var order = _repository.GetOrderById(orderId);
+                if (order != null)
+                {
+                    var item = order.Items.Where(i => id == i.Id).FirstOrDefault();
+                    if(item != null)
+                    {
+                        return Ok(_mapper.Map<OrderItem, OrderItemViewModel>(item));
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
                 else
                 {
