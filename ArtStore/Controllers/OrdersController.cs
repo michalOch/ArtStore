@@ -1,9 +1,11 @@
 ﻿using ArtStore.Data;
 using ArtStore.Data.Entities;
 using ArtStore.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 
 namespace ArtStore.Controllers
 {
@@ -12,11 +14,13 @@ namespace ArtStore.Controllers
     {
         private readonly IDutchRepository _repository;
         private readonly ILogger<ProductsController> _logger;
+        private readonly IMapper _mapper;
 
-        public OrdersController(IDutchRepository repository, ILogger<ProductsController> logger)
+        public OrdersController(IDutchRepository repository, ILogger<ProductsController> logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,7 +28,8 @@ namespace ArtStore.Controllers
         {
             try
             {
-                return Ok(_repository.GetAllOrders());
+                var result = _repository.GetAllOrders();
+                return Ok(_mapper.Map<IEnumerable<OrderViewModel>>(result));
             }
             catch (Exception ex)
             {
@@ -42,7 +47,7 @@ namespace ArtStore.Controllers
 
                 if(order != null)
                 {
-                    return Ok(order);
+                    return Ok(_mapper.Map<Order, OrderViewModel>(order));
                 }
                 else return NotFound();
 
@@ -57,18 +62,13 @@ namespace ArtStore.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]OrderViewModel model)
         {
-            // add it to the db
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var newOrder = new Order()
-                    {
-                        Id = model.OrderId,
-                        OrderDate = model.OrderDate,
-                        OrderNumber = model.OrderNumber
-                    };
+                    var newOrder = _mapper.Map<OrderViewModel, Order>(model);
 
+                    // additional check
                     if(newOrder.OrderDate == DateTime.MinValue)
                     {
                         newOrder.OrderDate = DateTime.Now;
@@ -77,14 +77,7 @@ namespace ArtStore.Controllers
                     _repository.AddEntity(newOrder);
                     if (_repository.SaveAll())
                     {
-                        var vm = new OrderViewModel()
-                        {
-                            OrderId = newOrder.Id,
-                            OrderDate = newOrder.OrderDate,
-                            OrderNumber = newOrder.OrderNumber
-                        };
-
-                        return Created($"/api/orders/{vm.OrderId}", vm);
+                        return Created($"/api/orders/{newOrder.Id}", _mapper.Map<Order, OrderViewModel>(newOrder));
                     }
                 }
                 else
