@@ -13,10 +13,10 @@ namespace ArtStore.Controllers
     public class OrdersController : Controller
     {
         private readonly IDutchRepository _repository;
-        private readonly ILogger<ProductsController> _logger;
+        private readonly ILogger<OrdersController> _logger;
         private readonly IMapper _mapper;
 
-        public OrdersController(IDutchRepository repository, ILogger<ProductsController> logger, IMapper mapper)
+        public OrdersController(IDutchRepository repository, ILogger<OrdersController> logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
