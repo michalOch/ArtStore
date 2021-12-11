@@ -42,12 +42,28 @@ namespace ArtStore.Data
                 .ToList();
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
-            return _context.Orders
-                .Include(o => o.Items)
-                .ThenInclude(i => i.Product)
-                .ToList();
+            try
+            {
+                if (includeItems)
+                {
+                    return _context.Orders
+                                .Include(o => o.Items)
+                                .ThenInclude(i => i.Product)
+                                .ToList();
+                }
+                else
+                {
+                    return _context.Orders
+                                .ToList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed to get all orders: {ex}");
+                return null;
+            }
         }
 
         public Order GetOrderById(int id)

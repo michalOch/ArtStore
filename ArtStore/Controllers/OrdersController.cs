@@ -24,11 +24,11 @@ namespace ArtStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(bool includeItems = true)
         {
             try
             {
-                var result = _repository.GetAllOrders();
+                var result = _repository.GetAllOrders(includeItems);
                 return Ok(_mapper.Map<IEnumerable<OrderViewModel>>(result));
             }
             catch (Exception ex)
