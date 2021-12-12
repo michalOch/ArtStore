@@ -29,15 +29,15 @@ namespace ArtStore.Data
             // Ensure that database is created
             _ctx.Database.EnsureCreated();
 
-            var user = await _userManager.FindByEmailAsync("ochrobot1990@gmil.com");
+            var user = await _userManager.FindByEmailAsync("ochrobot1990@gmail.com");
             if(user == null)
             {
                 user = new StoreUser()
                 {
                     FirstName = "Michal",
                     LastName = "Och",
-                    Email = "ochrobot1990@gmil.com",
-                    UserName = "ochrobot1990@gmil.com"
+                    Email = "ochrobot1990@gmail.com",
+                    UserName = "ochrobot1990@gmail.com"
                 };
 
                 var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
