@@ -2,6 +2,8 @@
 using ArtStore.Data.Entities;
 using ArtStore.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +13,7 @@ using System.Linq;
 namespace ArtStore.Controllers
 {
     [Route("/api/orders/{orderid}/items")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class OrderItemsController : Controller
     {
@@ -30,7 +33,8 @@ namespace ArtStore.Controllers
         {
             try
             {
-                var order = _repository.GetOrderById(orderId);
+                var username = User.Identity.Name;
+                var order = _repository.GetOrderById(username, orderId);
                 if (order != null)
                 {
                     return Ok(_mapper.Map<IEnumerable<OrderItem>, IEnumerable<OrderItemViewModel>>(order.Items));
@@ -53,7 +57,7 @@ namespace ArtStore.Controllers
         {
             try
             {
-                var order = _repository.GetOrderById(orderId);
+                var order = _repository.GetOrderById(User.Identity.Name,orderId);
                 if (order != null)
                 {
                     var item = order.Items.Where(i => id == i.Id).FirstOrDefault();
