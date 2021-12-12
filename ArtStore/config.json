@@ -12,5 +12,11 @@
       "Default": "Information",
       "Microsoft": "Warning"
     }
+  },
+
+  "Token": {
+    "Key": ";fasdads;ddasd;ddasda;;dsadasd;sdasd;dasd;",
+    "Issuer": "http://localhost:8888",
+    "Audiance": "http://localhost:8888"
   }
 }

@@ -10,10 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ArtStore
@@ -34,9 +36,24 @@ namespace ArtStore
             services.AddDbContext<DutchContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("DutchContextDb")));
 
             services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<DutchContext>();
+
+
+            // ValidAudience should be set to ValidAudience = _config["Token:Audience"], but it cause error 
+            // so I set ValidateAudience = false just for tests
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
                 {
-                    cfg.User.RequireUniqueEmail = true;
-                }).AddEntityFrameworkStores<DutchContext>();
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = _config["Token:Issuer"],
+                        ValidateAudience = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]))
+                    };
+                });
 
             services.AddTransient<DutchSeeder>();
 
@@ -46,7 +63,6 @@ namespace ArtStore
 
             services.AddScoped<IDutchRepository, DutchRepository>();
 
-            //services.AddMvc();
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation()
                 .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/Hup9wZO29r0WyhAiCmN6JyxJOj+FSrMZQT8/Rzw6XfJ7sv14IrcLVMAGcN58FzAFyFLGSv4UELv21BD0u0tzA==",
+  "dgSpecHash": "cydUK/Re+yNY9RcpcTjCgGyXMXRrkZkzOfPhqXKFAtZz040U9wHfTjU+IPwnczOCdiYMX0917Mow/L68fZcnig==",
   "success": true,
   "projectFilePath": "C:\\Users\\moch2\\OneDrive - DXC Production\\Documents\\Dev\\ArtStore\\ArtStore\\ArtStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\moch2\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\moch2\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\moch2\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.21\\microsoft.aspnetcore.authentication.jwtbearer.3.1.21.nupkg.sha512",
     "C:\\Users\\moch2\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.21\\microsoft.aspnetcore.cryptography.internal.3.1.21.nupkg.sha512",
     "C:\\Users\\moch2\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.21\\microsoft.aspnetcore.cryptography.keyderivation.3.1.21.nupkg.sha512",
     "C:\\Users\\moch2\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.21\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.21.nupkg.sha512",
