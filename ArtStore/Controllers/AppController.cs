@@ -1,6 +1,7 @@
 ﻿using ArtStore.Data;
 using ArtStore.Services;
 using ArtStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace ArtStore.Controllers
             return View();
         }
 
-
+        [Authorize]
         public IActionResult Shop()
         {
             var result = _repository.GetAllProducts();
