@@ -1,11 +1,13 @@
 ﻿using ArtStore.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ArtStore.Data
 {
@@ -13,17 +15,37 @@ namespace ArtStore.Data
     {
         private readonly DutchContext _ctx;
         private readonly IWebHostEnvironment _env;
+        private readonly UserManager<StoreUser> _userManager;
 
-        public DutchSeeder(DutchContext ctx, IWebHostEnvironment env)
+        public DutchSeeder(DutchContext ctx, IWebHostEnvironment env, UserManager<StoreUser> userManager)
         {
             _ctx = ctx;
             _env = env;
+            _userManager = userManager;
         }
 
-        public void Seed()
+        public async Task SeedAsync()
         {
             // Ensure that database is created
             _ctx.Database.EnsureCreated();
+
+            var user = await _userManager.FindByEmailAsync("ochrobot1990@gmil.com");
+            if(user == null)
+            {
+                user = new StoreUser()
+                {
+                    FirstName = "Michal",
+                    LastName = "Och",
+                    Email = "ochrobot1990@gmil.com",
+                    UserName = "ochrobot1990@gmil.com"
+                };
+
+                var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
+                if(result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Failed to create default user!");
+                }
+            }
 
             if (!_ctx.Products.Any())
             {
@@ -34,10 +56,12 @@ namespace ArtStore.Data
 
                 _ctx.Products.AddRange(products);
 
+                // add previously created user to the order
                 var order = new Order()
                 {
-                    OrderDate = DateTime.Today,
-                    OrderNumber = "10000",
+                    OrderDate = DateTime.Now,
+                    OrderNumber = "12345",
+                    User = user,
                     Items = new List<OrderItem>()
                     {
                         new OrderItem()
