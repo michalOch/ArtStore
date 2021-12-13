@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cydUK/Re+yNY9RcpcTjCgGyXMXRrkZkzOfPhqXKFAtZz040U9wHfTjU+IPwnczOCdiYMX0917Mow/L68fZcnig==",
+  "dgSpecHash": "YTh0EilU2HUrvGbjGCj8V2TSOcWUwRPver4hIOngJFRsPUlz1dEy9/8p7U2c0DeHFqVBasHMEN4QFsQnqRvCdQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\moch2\\OneDrive - DXC Production\\Documents\\Dev\\ArtStore\\ArtStore\\ArtStore.csproj",
+  "projectFilePath": "C:\\Users\\moch2\\OneDrive - DXC Production\\Documents\\Dev\\DutchTreat_ArtStore\\ArtStore\\ArtStore\\ArtStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\moch2\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\moch2\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
